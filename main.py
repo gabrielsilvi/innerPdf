@@ -1,5 +1,3 @@
-import re
-import inner
 import PyPDF2
 
 print("Digite quantos arquivos vai juntar...")
