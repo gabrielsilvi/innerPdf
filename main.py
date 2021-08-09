@@ -1,7 +1,7 @@
 import PyPDF2
 
 print("Digite quantos arquivos vai juntar...")
-print("Ou digite 'ex' para cancelar")
+print("Ou digite 'exit' para cancelar")
 nArquivos=int(input())
 print("Escolhendo arquivos...")
 merge = PyPDF2.PdfFileMerger()
@@ -12,7 +12,7 @@ if (type(nArquivos)==int):
         print("Escolhendo arquivo "+str(contador))
         arq=open(input(),'rb')
         merge.append(PyPDF2.PdfFileReader(arq))
-        if(contador<nArquivos):
+        if(contador==nArquivos):
             merge.write(r'C:\Users\gabri\Desktop\novoArquivo.pdf')
         contador+=1
 
@@ -22,7 +22,7 @@ if (type(nArquivos)==int):
 # for i in range(1,nArquivos+1):
 #     local='arq'+str(i)
 
-# elif(nArquivos=="ex"):
+# elif(nArquivos=="exit"):
 #     print("Saindo...")
 # elif(type(nArquivos) != int):
 #     print("Entrada Invalida!...")
