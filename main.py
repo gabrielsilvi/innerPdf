@@ -1,49 +1,25 @@
 import PyPDF2
+from tkinter import filedialog, messagebox, Tcl
 
 print("Digite quantos arquivos vai juntar...")
 print("Ou digite 'exit' para cancelar")
-nArquivos=int(input())
+nArquivos=int(input()) #quantidade de arquivos para juntar, forcando o user a usar tipos int
 print("Escolhendo arquivos...")
-merge = PyPDF2.PdfFileMerger()
+merge = PyPDF2.PdfFileMerger() #chamada da funcao que faz o merge na lib pypfd2
 if (type(nArquivos)==int):
-    merge = PyPDF2.PdfFileMerger()
     contador = 1
-    while(contador<=nArquivos):
+    quest = messagebox.showinfo(title='message', message='Escolha os Arquivos!')  # messagebox para selecao
+    while(contador<=nArquivos): #loop onde usa como condicao a nArquivos para finalizar
         print("Escolhendo arquivo "+str(contador))
-        arq=open(input(),'rb')
-        merge.append(PyPDF2.PdfFileReader(arq))
+
+        arq=filedialog.askopenfilename() #escolhendo os arquivos
+
+        merge.append(PyPDF2.PdfFileReader(arq)) #adicionado os arquivos escolhidos
         if(contador==nArquivos):
-            merge.write(r'C:\Users\gabri\Desktop\novoArquivo.pdf')
+            quest=messagebox.showinfo(title='Destino', message='Escolha o destino!')
+            localArq=filedialog.askdirectory() #escolhendo local onde novo arquivo sera salvo
+            print(localArq+ "/novoarquivo.pdf")
+            merge.write(localArq+"/novoarquivo.pdf")
         contador+=1
 
     print("Concluido!")
-
-
-# for i in range(1,nArquivos+1):
-#     local='arq'+str(i)
-
-# elif(nArquivos=="exit"):
-#     print("Saindo...")
-# elif(type(nArquivos) != int):
-#     print("Entrada Invalida!...")
-#
-
-# arq1=r'C:\Users\gabri\Desktop\teste.pdf'
-# arq2=r'C:\Users\gabri\Desktop\teste2.pdf'
-#
-# arcpdf = PyPDF2.PdfFileReader(arq1)
-# arcpdf2 = PyPDF2.PdfFileReader(arq2)
-#
-# merge = PyPDF2.PdfFileMerger()
-#
-# merge.append(arcpdf)
-# merge.append(arcpdf2)
-#
-# merge.write(r'C:\Users\gabri\Desktop\novoArquivo.pdf')
-
-#########Testes#########
-# pag = arcpdf.getPage(0)
-# pag1 = arcpdf.getPage(1)
-# content = pag.extractText()+pag1.extractText()
-# content = re.sub('\n','',content)
-# print(content)
